@@ -5,6 +5,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
+import { MembersDetailComponent } from './members/members-detail/members-detail.component';
 import { MembersListComponent } from './members/members-list/members-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -16,15 +17,19 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'members', component: MembersListComponent, canActivate:[AuthGuard] },
-      { path: 'members/:id', component: MembersListComponent },
+      {
+        path: 'members',
+        component: MembersListComponent,
+        canActivate: [AuthGuard],
+      },
+      { path: 'members/:username', component: MembersDetailComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
     ],
   },
-{path: 'errors', component: TestErrorsComponent},
-{path: 'not-found', component: NotFoundComponent},
-{path: 'server-error', component: ServerErrorComponent},
+  { path: 'errors', component: TestErrorsComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
